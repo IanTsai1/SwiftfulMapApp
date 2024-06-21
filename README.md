@@ -1,0 +1,1 @@
+Developed a Swift-based app to visualize global landmarks, leveraging MVVM architecture and advanced SwiftUI features including frames, alignments, animations, and transitions to create an interactive and visually appealing user interface.
