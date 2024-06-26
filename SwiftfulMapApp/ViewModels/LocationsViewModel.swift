@@ -16,15 +16,20 @@ class LocationsViewModel: ObservableObject{
     //All loaded locations
     @Published var locations: [Location]
     
-    //when we change the location, region will automatically be updated
+    //when we change the location, region will automatically be updated by calling the func
     @Published var mapLocation: Location {
         didSet {
             updateMapRegion(location: mapLocation)
         }
     }
+    
+    //current region on map
     @Published var mapRegion: MapCameraPosition = MapCameraPosition.region(MKCoordinateRegion())
     
     let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    
+    //show list of locations(give a boolean so it will show vs not show)
+    @Published var showLocationsList: Bool = false
     
     init(){
         //get the value of "locations" from LocationsDataService
@@ -34,12 +39,26 @@ class LocationsViewModel: ObservableObject{
         self.mapLocation = locations.first!
         self.updateMapRegion(location: mapLocation)
     }
+    
     //update map region given location
     private func updateMapRegion(location: Location){
         withAnimation(.easeInOut){
             mapRegion = MapCameraPosition.region(MKCoordinateRegion(
                 center: location.coordinates,
                 span: mapSpan))
+        }
+    }
+    
+    public func toggleLocationsList(){
+        withAnimation(.easeInOut){
+            showLocationsList = !showLocationsList
+        }
+    }
+    
+    public func showNextLocation(location: Location){
+        withAnimation(.easeInOut){
+            mapLocation = location
+            
         }
     }
 }

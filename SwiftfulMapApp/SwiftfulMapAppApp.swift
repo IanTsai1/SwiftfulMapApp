@@ -15,7 +15,7 @@ struct SwiftfulMapAppApp: App {
     @StateObject private var vm = LocationsViewModel()
     var body: some Scene {
         WindowGroup {
-            //LocationsView() contains UI; Everything in "Views" folder is for UI
+            //LocationsView() contains UI
             //enviorment object allows sharing and access of data across diff. view
             //anything in this LocationsView() or child of it will have reference to "vm"
             LocationsView()
